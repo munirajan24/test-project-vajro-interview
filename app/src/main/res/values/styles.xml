@@ -1,0 +1,122 @@
+<resources>
+
+<!--    &lt;!&ndash; Base application theme. &ndash;&gt;-->
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+<!--    </style>-->
+
+
+    <style name="add_button_style" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_corner</item>
+        <item name="backgroundTint">#FC8F00</item>
+        <item name="elevation">5dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:tint">#fff</item>
+    </style>
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="orange_btn_1" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_corner</item>
+        <item name="backgroundTint">@color/md_orange_60</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingRight">@dimen/space_4</item>
+        <item name="android:paddingLeft">@dimen/space_4</item>
+        <item name="android:textColor">@color/orangeBackground</item>
+        <item name="android:layout_marginBottom">@dimen/space_4</item>
+        <item name="android:layout_marginTop">@dimen/space_4</item>
+        <item name="android:tint">@color/orangeBackground</item>
+    </style>
+    <style name="orange_btn_2" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_corner</item>
+        <item name="backgroundTint">@color/orangeBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingRight">@dimen/space_24</item>
+        <item name="android:paddingLeft">@dimen/space_24</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/orangeBackground</item>
+        <item name="android:layout_marginBottom">@dimen/space_4</item>
+        <item name="android:layout_marginTop">@dimen/space_4</item>
+        <item name="android:tint">@color/orangeBackground</item>
+    </style>
+    <style name="danger_btn_1" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_corner</item>
+        <item name="backgroundTint">@color/md_orange_600</item>
+        <item name="elevation">@dimen/space_5</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font_body_s_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginBottom">@dimen/space_4</item>
+        <item name="android:layout_marginTop">@dimen/space_4</item>
+        <item name="android:layout_marginStart">@dimen/space_8</item>
+        <item name="android:layout_marginEnd">@dimen/space_8</item>
+        <item name="android:tint">@color/md_orange_600</item>
+    </style>
+
+
+    <style name="text" parent="">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="product_card" parent="">
+        <item name="elevation">@dimen/space_2</item>
+        <item name="android:shadowColor">@color/md_grey_400</item>
+        <item name="backgroundColor">@color/blueLightBackground</item>
+        <item name="cornerRadius">17dp</item>
+        <item name="background">@color/blueLightBackground</item>
+        <item name="android:textViewStyle">@style/text</item>
+    </style>
+
+    <style name="cart_card" parent="">
+        <item name="elevation">@dimen/space_2</item>
+        <item name="android:shadowColor">@color/md_grey_400</item>
+        <item name="backgroundColor">@color/md_blue_grey_40</item>
+        <item name="cornerRadius">7dp</item>
+        <item name="android:textViewStyle">@style/text</item>
+    </style>
+
+    <!-- Style for the navigation drawer icon -->
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/black</item>
+    </style>
+
+    <style name="bar_title_style" parent="@style/Base.TextAppearance.AppCompat.Title">
+        <item name="android:textSize">@dimen/space_12</item>
+        <item name="android:fontFamily">@font/visby_round_cf_medium</item>
+
+    </style>
+
+    <!--bar style-->
+    <style name="ActionBarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">@color/md_grey_100</item>
+        <item name="iconTint">@color/black</item>
+        <item name="iconSize">12sp</item>
+        <item name="titleTextAppearance">@style/bar_title_style</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="borderWidth">1dp</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+</resources>

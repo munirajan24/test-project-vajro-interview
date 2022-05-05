@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="bar_title_style" parent="@style/Base.TextAppearance.AppCompat.Title">
+        <item name="android:textSize">@dimen/space_12</item>
+        <item name="android:fontFamily">@font/visby_round_cf_medium</item>
+    </style>
+</resources>

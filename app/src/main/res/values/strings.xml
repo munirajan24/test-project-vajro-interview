@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">test 1</string>
+
+    <string name="sub_total">Sub Total : </string>
+    <string name="tax">Tax (%s\%%):</string>
+</resources>

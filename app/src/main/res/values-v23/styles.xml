@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="danger_btn_1" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_corner</item>
+        <item name="backgroundTint">@color/md_orange_600</item>
+        <item name="elevation">@dimen/space_5</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font_body_s_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginBottom">@dimen/space_4</item>
+        <item name="android:layout_marginTop">@dimen/space_4</item>
+        <item name="android:layout_marginStart">@dimen/space_8</item>
+        <item name="android:layout_marginEnd">@dimen/space_8</item>
+        <item name="android:drawableTint">@color/white</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+</resources>
