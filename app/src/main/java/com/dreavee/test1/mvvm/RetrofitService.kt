@@ -14,7 +14,7 @@ interface RetrofitService {
 
     companion object {
         var retrofitService: RetrofitService? = null
-        fun getInstance() : RetrofitService {
+        fun getInstance(): RetrofitService {
             if (retrofitService == null) {
                 val retrofit = Retrofit.Builder()
                     .baseUrl("https://www.mocky.io/v2/")

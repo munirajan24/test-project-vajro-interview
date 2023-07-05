@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProductListBinding.inflate(layoutInflater)
         val view = binding.root
+
         setContentView(view)
 
         val retrofitService = RetrofitService.getInstance()
@@ -138,10 +139,9 @@ class MainActivity : AppCompatActivity() {
                 val qty = product.productQuantity
                 Log.d("productQuantity", "setupObserver: ${product.name} : ${qty}")
             }
-            getFromCart()
-            adapter.notifyDataSetChanged()
+            renderProductList(products)
+            updateCartIconCountFromDB()
         }
-        renderProductList(products)
     }
 
     private fun renderProductList(productList: ProductList) {
@@ -181,7 +181,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private suspend fun getFromCart() {
+    private suspend fun updateCartIconCountFromDB() {
         productViewModel.getProductsFromCart().collect() {
             if (it.size > 0) {
                 binding.txtCartCount.visibility = VISIBLE

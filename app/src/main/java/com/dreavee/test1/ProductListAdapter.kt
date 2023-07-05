@@ -19,9 +19,7 @@ import kotlinx.android.synthetic.main.product_item_layout.view.imgProduct
 import kotlinx.android.synthetic.main.product_item_layout.view.txtPrice
 import kotlinx.android.synthetic.main.product_item_layout.view.txtProductName
 
-class ProductListAdapter(
-    private val products: ArrayList<Products>
-) : RecyclerView.Adapter<ProductListAdapter.DataViewHolder>() {
+class ProductListAdapter( private val products: ArrayList<Products>) : RecyclerView.Adapter<ProductListAdapter.DataViewHolder>() {
 
     lateinit var onItemClickListener: OnItemClickListener
 
