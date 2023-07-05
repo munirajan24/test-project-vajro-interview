@@ -3,6 +3,7 @@ package com.dreavee.test1
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -22,11 +23,19 @@ import com.google.gson.Gson
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+enum class STATE_OF_PRODUCT {
+    ADDED,
+    SUBTRACTED,
+    NO_CHANGE
+}
+
 class ProductDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailsBinding
     private lateinit var productViewModel: ProductViewModel
 
     private lateinit var products: Products
+
+    var stateOfProduct = STATE_OF_PRODUCT.NO_CHANGE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +54,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         productViewModel = ViewModelProvider(
             this,
             MyViewModelFactory(mainRepository)
-        ).get(ProductViewModel::class.java)
+        )[ProductViewModel::class.java]
 
         setupUI()
     }
@@ -54,36 +63,46 @@ class ProductDetailsActivity : AppCompatActivity() {
         binding.txtProductName.text = products.name
         binding.txtPrice.text = products.price
         binding.txtQty.text = (products.productQuantity ?: 0).toString()
+        refreshCart()
+
         Glide.with(binding.imgProduct.context)
             .load(products.image)
             .into(binding.imgProduct)
 
         binding.btnAddition.setOnClickListener {
+            stateOfProduct = STATE_OF_PRODUCT.ADDED
             products.productQuantity = products.productQuantity?.plus(1)
             binding.txtQty.text = (products.productQuantity ?: 0).toString()
 
+            if (products.productQuantity!! > 0) {
+                binding.txtCartCount.visibility = VISIBLE
+                binding.txtCartCount.text =
+                    binding.txtCartCount.text.toString().toInt().plus(1).toString()
+            }
         }
         binding.btnMinus.setOnClickListener {
+            stateOfProduct = STATE_OF_PRODUCT.SUBTRACTED
             if (products.productQuantity != 0) {
-                binding.btnAdd.text = "add"
                 products.productQuantity = products.productQuantity?.minus(1)
                 binding.txtQty.text = (products.productQuantity ?: 0).toString()
-            } else {
-                binding.btnAdd.text = "update"
             }
+            binding.btnAdd.text = if (products.productQuantity != 0) "add" else "update"
+            if (products.productQuantity!! == 0) {
+                binding.txtCartCount.text =
+                    binding.txtCartCount.text.toString().toInt().minus(1).toString()
 
+                binding.txtCartCount.visibility =
+                    if (binding.txtCartCount.text.toString().toInt() == 0) GONE else VISIBLE
+            }
         }
 
         binding.btnAdd.setOnClickListener {
-
             lifecycleScope.launch {
-                addToCart(products)
+                updateCartProduct(products)
                 onBackPressed()
             }
 
         }
-
-
 
         binding.txtCartCount.setOnClickListener {
             var intent = Intent(this, CartActivity::class.java)
@@ -112,8 +131,8 @@ class ProductDetailsActivity : AppCompatActivity() {
         lifecycleScope.launch {
             products.productQuantity = getCartProductQuantityById(products.product_id) ?: 0
             val qty = products.productQuantity
-            Log.d("productQuantity", "setupObserver: ${products.name} : ${qty}")
-            getFromCart()
+            Log.d("productQuantity", "refreshCart: ${products.name} : ${qty}")
+            updateCartIconCountFromDB()
         }
     }
 
@@ -128,19 +147,39 @@ class ProductDetailsActivity : AppCompatActivity() {
 
 
     private suspend fun addToCart(product: Products) {
-        productViewModel.addProductsToDB(Utils.apiToDbProduct(product))
+
     }
 
     private suspend fun updateCartProduct(product: Products) {
-        if (product.productQuantity == 0) {
-            productViewModel.removeProductsFromDB(Utils.apiToDbProduct(product))
-        } else {
-            productViewModel.updateProductsToDB(Utils.apiToDbProduct(product))
+
+        when (stateOfProduct) {
+            STATE_OF_PRODUCT.NO_CHANGE -> {
+                if (product.productQuantity == 0 || product.productQuantity == 1) {
+                    productViewModel.addProductsToDB(Utils.apiToDbProduct(product))
+                }
+            }
+
+            STATE_OF_PRODUCT.ADDED -> {
+                if (product.productQuantity == 1) {
+                    productViewModel.addProductsToDB(Utils.apiToDbProduct(product))
+                } else {
+                    productViewModel.updateProductsToDB(Utils.apiToDbProduct(product))
+                }
+            }
+
+            STATE_OF_PRODUCT.SUBTRACTED -> {
+                if (product.productQuantity!! == 0) {
+                    productViewModel.removeProductsFromDB(Utils.apiToDbProduct(product))
+                } else {
+                    productViewModel.updateProductsToDB(Utils.apiToDbProduct(product))
+                }
+            }
         }
+
     }
 
 
-    private suspend fun getFromCart() {
+    private suspend fun updateCartIconCountFromDB() {
         productViewModel.getProductsFromCart().collect() {
             if (it.size > 0) {
                 binding.txtCartCount.visibility = VISIBLE

@@ -15,10 +15,6 @@ class ViewModelFactory(private val apiHelper: ApiHelper, private val dbHelper: D
             return ProductViewModelOld(apiHelper, dbHelper) as T
         }
 
-
-
-
-
         throw IllegalArgumentException("Unknown class name")
     }
 
