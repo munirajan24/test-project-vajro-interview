@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">test 1</string>
+    <string name="app_name">Product Vajro Interview</string>
 
     <string name="sub_total">Sub Total : </string>
     <string name="tax">Tax (%s\%%):</string>

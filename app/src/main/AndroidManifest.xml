@@ -11,9 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Test1">
-        <activity
-            android:name=".ExampleActivity"
-            android:exported="false" />
+
         <activity
             android:name=".CartActivity"
             android:exported="false"
